@@ -1,16 +1,27 @@
 <?php
 function getDBConnection(){
-	$db_name='ch295301_rent';
-	$db_user='ch295301_rent';
-	$db_pass='welcome2$RENT';
+    //saransol_mtp
+    $db_name='ch295301_jewellery';
+    $db_user='ch295301_jewellery';
+    $db_pass='ch295301_$Jewellery';
+    
 	$conn=mysqli_connect('localhost',$db_user, $db_pass, $db_name) or die("error occured on getConnection " . mysqli_error($conn));	
 	return $conn;
 }
 function executeSQL($sql){
 	if (!mysqli_query(getDBConnection(), $sql))
 	{
-		die($sql . ' - executeSQL Error: ' . mysqli_error());
+	    die($sql . ' - executeSQL Error: ' . mysqli_error($conn));
 	}	
+}
+
+function insertSQL($sql){
+    $conn=getDBConnection();
+    if (mysqli_query($conn, $sql)) {
+        return mysqli_insert_id($conn);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
 }
 
 function selectSQL($sql){

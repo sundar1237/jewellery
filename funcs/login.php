@@ -8,14 +8,11 @@ function displayLoginPage($errMsg)
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
+<meta name="description" content="<?php echo MAIN_TITLE?> | Money Transfer Program">
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.1.1">
-<title>Saran Solutions | Login</title>
-
-<link rel="canonical"
-	href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+<title><?php echo MAIN_TITLE?> | Money Transfer Program</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,10 +37,12 @@ function displayLoginPage($errMsg)
 <link href="css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
+	
 	<form class="form-signin" method="post" action="index.php">
+				<h1 style="width: 100%;"><?php echo PROGRAM_TITLE ?></h1>			
 				<input type='hidden' name='action' value='verifyUser'> <img
-					class="mb-4" src="images/logo_saran.png" title="Saran Solutions">
-				<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+					class="mb-4" src="images/logo_saran.png" title="<?php echo MAIN_TITLE?>">
+				<h5>Please Sign In</h5>
 				<?php echo '<span class="badge badge-danger">'.$errMsg.'</span>'?>
 				<label for="inputEmail" class="sr-only">Username</label> <input
 					type="text" id="inputEmail" class="form-control"

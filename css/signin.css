@@ -15,9 +15,10 @@ body {
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 500px;
   padding: 15px;
   margin: auto;
+  border: 1px solid #d9d9d9;
 }
 .form-signin .checkbox {
   font-weight: 400;

@@ -114,38 +114,113 @@ EB Service No <input type="text" value="' . $tenants[0]['eb_service_no'] . '" cl
 </form>';
 }
 
-function updateHouse($id){
-    
-    $house_name=$_POST['house_name'];
-    $address=$_POST['address'];
-    $no_of_apartments=$_POST['no_of_apartments'];
-    
-    $ward=$_POST['ward_no'];
-    $google_map_src=$_POST['google_map_src'];
-    $eb_service_no=$_POST['eb_service_no'];
-    
-    executeSQL("update houses set 
-        house_name=".cheSNull($house_name).", 
-        address=".cheSNull($address).", 
-        
-        no_of_apartments=".cheNull($no_of_apartments)."
-,ward_no=".cheSNull($ward)."
-,google_map_src=".cheSNull($google_map_src)."
-,eb_service_no=".cheSNull($eb_service_no)." where id = ".$id);
-
+function scriptForShowFormToNewCustomer(){
+    ?>
+    <script>
+$(document).ready(function() {
+    $("[id=showFormToAddCustomer]").click(function () {
+        var url1 = $(this).data("url");
+        $.ajax({
+            dataType: "html",
+            type: "GET",
+            url: url1,
+            success: function(msg){                
+                $(".modal-body").html(msg);
+                $("#formToAddCustomer").modal("show");
+            }
+        });
+    });
+});
+</script>
+    <?php
 }
 
-function getHouseOccupationStatus($houseStatus){
-    $response = '';
-    $statusValues = array("Empty", "Occupied");
-    foreach ($statusValues as $row){
-        if ($row == $houseStatus){
-            $response .= '<label class="btn btn-info btn-sm active"><input autocomplete="off" checked id="'. $houseStatus . '" name="status" type="radio"> ' . $houseStatus . '</label>';
-        }else{
-            $response .= '<label class="btn btn-outline-info btn-sm"><input autocomplete="off" id="' . $row . '" name="status" type="radio">' . $row . '</label>';
-        }
-    }
-    return $response;
+function modalToAddCustomer(){
+    ?> 
+    <!-- Modal for add customer -->
+		<div class="modal fade" id="formToAddCustomer" role="dialog" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form action="customers.php" method="POST" name="add_customer">
+						<input type="hidden" name="action" value="add_customer">
+						<div class="modal-header" style='border: none;'>
+							<h5 class="modal-title">
+								Add New Customer <i class="fa fa-check-square" aria-hidden="true"></i>
+							</h5>
+							<button aria-hidden="true" class="close" data-dismiss="modal"
+								type="button">×</button>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" style='' data-dismiss="modal">Close</button>
+							<button class="btn btn-primary" type="submit" id="atc" style=''>Proceed</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Modal - show atc response -->
+		<?php 
 }
+
+function addNewCustomerButton(){
+    ?>
+    	<button class="btn btn-primary btn-sm btn-action1" title="Add New Customer" data-url="customers.php?action=showFormToAddCustomer" id="showFormToAddCustomer" type="button">Add New Customer</button>
+    <?php 
+}
+
+function modalToAddReceiver(){
+    ?>
+    	<!-- Modal for add customer -->
+		<div class="modal fade" id="formToAddReceiver" role="dialog" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form action="receivers.php" method="POST" name="add_customer">
+						<input type="hidden" name="action" value="add_receiver">
+						<div class="modal-header" style='border: none;'>
+							<h5 class="modal-title">
+								Add New Receiver <i class="fa fa-check-square" aria-hidden="true"></i>
+							</h5>
+							<button aria-hidden="true" class="close" data-dismiss="modal"
+								type="button">×</button>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" style='' data-dismiss="modal">Close</button>
+							<button class="btn btn-primary" type="submit" id="addReceiver" style=''>Proceed</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Modal - show atc response -->
+    
+    
+		<?php 
+}
+
+function scriptForShowFormToNewReceiver(){
+    ?>
+    <script>
+
+$(document).on('click','#showFormToAddReceiver',function(){
+	var url1 = $(this).data("url");        	  
+	  
+	  $.ajax({
+          dataType: "html",
+          type: "GET",
+          url: url1,
+          success: function(msg){                
+              $(".modal-body").html(msg);
+              $("#formToAddReceiver").modal("show");
+          }
+      });
+ });
+</script>
+    <?php
+}
+
+
+
 
 ?>
